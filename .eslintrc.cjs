@@ -1,3 +1,5 @@
+"use strict";
+
 module.exports = {
   root: true,
   env: { browser: true, es2020: true },
@@ -7,10 +9,25 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended'
   ],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.ts'],
   parser: '@typescript-eslint/parser',
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
-  parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', '@typescript-eslint', 'simple-import-sort', 'unused-imports', 'import', 'prettier'],
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true
+    },
+    ecmaVersion: 12,
+    sourceType: 'module',
+    project: './tsconfig.json'
+  },
+  plugins: [
+    'react-refresh',
+    'react',
+    '@typescript-eslint',
+    'simple-import-sort',
+    'unused-imports',
+    'import',
+    'prettier'
+  ],
   rules: {
     'react-refresh/only-export-components': [
       'warn',
@@ -51,11 +68,6 @@ module.exports = {
       tsx: 'never'
     }],
     'import/no-extraneous-dependencies': 'off',
-    'jest/no-disabled-tests': 'warn',
-    'jest/no-focused-tests': 'error',
-    'jest/no-identical-title': 'error',
-    'jest/prefer-to-have-length': 'warn',
-    'jest/valid-expect': 'error',
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': [
       'error',
@@ -75,7 +87,7 @@ module.exports = {
       { "endOfLine": "auto" }
     ]
   },
-  "settings": {
+  settings: {
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx']
     },
@@ -83,9 +95,6 @@ module.exports = {
       typescript: {
         alwaysTryTypes: true
       }
-    },
-    jest: {
-      version: 26
     },
     react: {
       version: 'detect'

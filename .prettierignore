@@ -1,0 +1,7 @@
+# Ignore these artifacts
+build
+coverage
+*.http
+*.md
+*.svg
+vite.config.ts
