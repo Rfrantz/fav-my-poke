@@ -1,0 +1,49 @@
+@host = https://pokeapi.co/api/v2
+@name = {{pokemons.response.body.results[0].name}}
+@spriteUrl = {{pokemon.response.body.sprites.other.dream_world.front_default}}
+
+
+## All APIs
+GET {{host}} HTTP/1.1
+Accept: application/json
+
+
+###
+
+
+## All Pokemons
+# @name pokemons
+GET {{host}}/pokemon HTTP/1.1
+Accept: application/json
+
+###
+
+
+## Pokemon by ID
+# @name pokemon
+GET {{host}}/pokemon/18 HTTP/1.1
+Accept: application/json
+
+
+###
+
+
+## Pokémon Ability
+# @name ability
+GET {{host}}/ability/34 HTTP/1.1
+Accept: application/json
+
+###
+
+## Characteristic
+# @name characteristic
+GET {{host}}/characteristic/18 HTTP/1.1
+Accept: application/json
+
+
+###
+
+
+## Language
+GET {{host}}/language/9 HTTP/1.1
+Accept: application/json
