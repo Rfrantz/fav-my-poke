@@ -10,7 +10,7 @@ Home Screen | Details | Favorites
 ![Home Screen](https://rgallotti.com/img/favmypoke-home.png "Home Screen") | ![Details](https://rgallotti.com/img/favmypoke-details.png "Details") | ![Favorites](https://rgallotti.com/img/favmypoke-favorites.png "Favorites")
 
 ## Stack 🛠️
-React + TypeScript + Stitches + Bootstrap + Vite 
+__React + TypeScript + Router + Stitches + Bootstrap + Vite__
 
 __Node >= v18__
 
