@@ -15,7 +15,7 @@ export const Details = () => {
 
   // Call the useDetails custom hook to fetch the details of the pokemon using the provided URL
   const { pokemonDetails, isFavorite, handleSaveFavoriteAction, handleRemoveFavoriteAction } =
-    useDetails(url, name);
+    useDetails(url, imageUrl, name);
 
   return (
     <DetailsWrapper className="container-fluid d-flex justify-content-center align-content-start align-items-center flex-wrap">

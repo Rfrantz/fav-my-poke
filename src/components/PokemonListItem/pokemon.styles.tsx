@@ -7,8 +7,7 @@ export const PokemonItemWrap = styled('div', {
   background: 'white',
   '@media(min-width: 912px)': {
     height: '250px',
-    justifyContent: 'space-between',
-    width: 'calc(25% - 48px)',
+    width: 'calc(25% - 12px)',
     marginRight: '12px',
     paddingInlineEnd: '0',
     paddingBlockEnd: '18px',

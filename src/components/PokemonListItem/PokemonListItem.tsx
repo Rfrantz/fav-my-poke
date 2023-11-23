@@ -3,7 +3,7 @@ import { PokemonImageWrapper, PokemonItemWrap, PokemonNameWrapper } from './poke
 type PokemonListItemArgs = {
   name: string;
   imageUrl: string;
-  callBack: () => void;
+  callBack?: () => void;
 };
 
 export const PokemonListItem = ({ name, imageUrl, callBack }: PokemonListItemArgs) => (

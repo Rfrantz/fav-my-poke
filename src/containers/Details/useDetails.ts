@@ -34,6 +34,7 @@ export type StatItem = {
 export type PokemonDetails = {
   id: number;
   name: string;
+  imageUrl: string;
   abilities: AbilityItem[];
   stats: StatItem[];
   weight: number;
@@ -41,7 +42,7 @@ export type PokemonDetails = {
   charactheriscs: string;
 };
 
-export const useDetails = (pokemonUrl: string, name: string) => {
+export const useDetails = (pokemonUrl: string, imageUrl: string, name: string) => {
   // Use custom hook to fetch the pokemon details
   const { getPokemon } = usePokeApi();
 
@@ -75,6 +76,7 @@ export const useDetails = (pokemonUrl: string, name: string) => {
       try {
         const pokemonDetails: PokemonDetails = await getPokemon(pokemonUrl);
         pokemonDetails.name = name;
+        pokemonDetails.imageUrl = imageUrl;
         setPokemonDetails(pokemonDetails);
 
         const id = pokemonDetails.id;

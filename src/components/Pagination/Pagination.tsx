@@ -55,7 +55,7 @@ export const PokemonsPagination = ({
 
   return (
     // Render the pagination component with the generated items
-    <Pagination key={'pagination'}>
+    <Pagination key={'pagination'} className="mt-4">
       <Pagination.First key={'first'} onClick={() => goPage(1)} />
       <Pagination.Prev key={'prev'} onClick={() => goPage(currentPage - 1)} />
 
