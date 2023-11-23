@@ -14,6 +14,11 @@ __React + TypeScript + Router + Stitches + Bootstrap + Vite__
 
 __Node >= v18__
 
+To optimize the development flow I've decided to use a combination of linters and prettier. Important install all extensions needed by vs code:
+
+- [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
 ## How to use 👨🏻‍🏫
 - Clone project;
 - Ensure that you're usign Node >= v18;
