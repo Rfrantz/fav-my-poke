@@ -1,30 +1,29 @@
-# React + TypeScript + Vite
+# Fav My Poke <img src="https://rgallotti.com/img/pokeball.ico" alt="pokeball" style="height: 22px; width:22px;"/>
+A little application intuitive, simple and objective. Made to view and save Pokémons created along them history.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Created to training abilities and test vine over CRA 
 
-Currently, two official plugins are available:
+## App Images 📸
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Home Screen | Details | Favorites
+------ | ------ | -----
+![Home Screen](https://rgallotti.com/img/favmypoke-home.png "Home Screen") | ![Details](https://rgallotti.com/img/favmypoke-details.png "Details") | ![Favorites](https://rgallotti.com/img/favmypoke-favorites.png "Favorites")
 
-## Expanding the ESLint configuration
+## Stack 🛠️
+React + TypeScript + Stitches + Bootstrap + Vite 
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+__Node >= v18__
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## How to use 👨🏻‍🏫
+- Clone project;
+- Ensure that you're usign Node >= v18;
+- Install all dependencies with
+```bash
+npm i
 ```
+- Start the application using 
+```bash
+npm start
+```
+- Follow the url displayed in your console.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
