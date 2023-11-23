@@ -36,9 +36,18 @@ export const PokemonImageWrapper = styled('div', {
 export const PokemonNameWrapper = styled('div', {
   width: '60%',
   paddingInlineStart: '12px',
+
+  span: {
+    fontSize: '20px',
+  },
+
   '@media(min-width: 912px)': {
     width: '100%',
     textAlign: 'center',
     marginStart: '0',
+
+    span: {
+      fontSize: '18px',
+    },
   },
 });

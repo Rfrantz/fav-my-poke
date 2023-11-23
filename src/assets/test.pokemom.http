@@ -21,7 +21,7 @@ Accept: application/json
 
 ## Pokemon by ID
 # @name pokemon
-GET {{host}}/pokemon/18 HTTP/1.1
+GET {{host}}/pokemon/1 HTTP/1.1
 Accept: application/json
 
 
@@ -30,14 +30,22 @@ Accept: application/json
 
 ## Pokémon Ability
 # @name ability
-GET {{host}}/ability/34 HTTP/1.1
+GET {{host}}/ability/61 HTTP/1.1
 Accept: application/json
 
 ###
 
 ## Characteristic
 # @name characteristic
-GET {{host}}/characteristic/18 HTTP/1.1
+GET {{host}}/characteristic/2 HTTP/1.1
+Accept: application/json
+
+
+###
+
+## Item
+# @name item
+GET {{host}}/item/222/ HTTP/1.1
 Accept: application/json
 
 

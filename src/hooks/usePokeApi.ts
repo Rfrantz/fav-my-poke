@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { POKEAPI_ENDPOINTS, POKEAPI_HOST } from '../utils/constants/pokeapi';
 
-type PokemonListResults = {
+export type PokemonItemResult = {
   name: string;
   url: string;
   imageUrl: string;
@@ -10,12 +10,12 @@ type PokemonListResults = {
 
 type PokemonList = {
   count: number;
-  results: PokemonListResults[];
+  results: PokemonItemResult[];
 };
 
 export const usePokeApi = () => {
-  const [pokemonsListNoPhoto, setPokemonsListNoPhoto] = useState<PokemonListResults[]>();
-  const [pokemonsList, setPokemonsList] = useState<PokemonListResults[]>();
+  const [pokemonsListNoPhoto, setPokemonsListNoPhoto] = useState<PokemonItemResult[]>();
+  const [pokemonsList, setPokemonsList] = useState<PokemonItemResult[]>();
   const [pokemonsCount, setPokemonsCount] = useState<number>(0);
   const [isFetchingPokemonSprite, setIsFetchingPokemonSprite] = useState<boolean>(false);
   const [isFetchingPokemons, setIsFetchingPokemons] = useState<boolean>(false);
@@ -34,7 +34,8 @@ export const usePokeApi = () => {
     [pokemonsListNoPhoto],
   );
 
-  const getPokemons = (offset: number, limit: number) => {
+  const getPokemons = (page: number, limit: number) => {
+    const offset = (page - 1) * 20;
     setIsFetchingPokemons(true);
     fetch(`${POKEAPI_HOST}${POKEAPI_ENDPOINTS.POKEMON}?offset=${offset}&limit=${limit}`, {
       headers: {},
@@ -50,15 +51,21 @@ export const usePokeApi = () => {
       .finally(() => setIsFetchingPokemons(false));
   };
 
-  useEffect(() => {
-    !isFetchingPokemons && getPokemons(0, 0);
-  }, []);
+  const getPokemon = (url: string) =>
+    fetch(url, {
+      headers: {},
+    })
+      .then((response) => response.json())
+      .then((json) => json)
+      .catch((error) => {
+        console.error('GetPokemon', error);
+      });
 
   useEffect(() => {
     if (!isFetchingPokemonSprite) {
       const updatePokemonsList = async () => {
         const updatedList = pokemonsListNoPhoto ?? [];
-        const promises = updatedList.map((pokemon: PokemonListResults) =>
+        const promises = updatedList.map((pokemon: PokemonItemResult) =>
           getPokemonSprite(pokemon.url).then((imageUrl: string) => {
             const foundPokemon = updatedList.find(({ url }) => pokemon.url === url);
             if (foundPokemon) {
@@ -77,6 +84,8 @@ export const usePokeApi = () => {
   return {
     pokemonsList,
     pokemonsCount,
+    getPokemon,
     getPokemons,
+    isFetchingPokemons,
   };
 };
