@@ -1,42 +1,10 @@
-import { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 
-import { PokemonItemResult, usePokeApi } from '../../hooks/usePokeApi';
-import { POKEAPI_ENDPOINTS, POKEAPI_HOST } from '../../utils/constants/pokeapi';
+import { PokemonItemResult } from '../../hooks/usePokeApi';
 
 import { DetailsWrapper, InfoWrapper, PokemonImageWrapper, TextWrapper } from './details.styles';
-
-// Define types for abilities and ability items
-type Ability = {
-  name: string;
-  url: string;
-};
-
-type AbilityItem = {
-  ability: Ability;
-  is_hidden: boolean;
-  slot: number;
-};
-
-type Stat = {
-  name: string;
-  url: string;
-};
-
-type StatItem = {
-  base_stat: number;
-  effort: number;
-  stat: Stat;
-};
-
-type PokemonDetails = {
-  id: number;
-  abilities: AbilityItem[];
-  stats: StatItem[];
-  weight: number;
-  height: number;
-  charactheriscs: string;
-};
+import { AbilityItem, StatItem, useDetails } from './useDetails';
 
 export const Details = () => {
   // Get the state from the location hook provided by react-router-dom
@@ -45,48 +13,9 @@ export const Details = () => {
   // Destructure the required properties from the state object
   const { url, imageUrl, name }: PokemonItemResult = state;
 
-  // Use custom hook to fetch the pokemon details
-  const { getPokemon } = usePokeApi();
-
-  // State to store the fetched pokemon details
-  const [pokemonDetails, setPokemonDetails] = useState<PokemonDetails>();
-  const [isFetching, setIsFetching] = useState<boolean>(false);
-
-  // Fetch the pokemon details once when the component mounts
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsFetching(true);
-
-      try {
-        const pokemonDetails: PokemonDetails = await getPokemon(url);
-        setPokemonDetails(pokemonDetails);
-
-        const id = pokemonDetails.id;
-        const response = await getPokemon(
-          `${POKEAPI_HOST}${POKEAPI_ENDPOINTS.CHARACTERISTIC}${id}`,
-        );
-
-        if (!response?.descriptions) return;
-
-        const responseDetailsFound = response.descriptions.find(
-          (description: any) => description.language.name === 'en',
-        );
-
-        const newPokemonDetails = {
-          ...pokemonDetails,
-          charactheriscs: responseDetailsFound.description,
-        } as PokemonDetails;
-
-        setPokemonDetails(newPokemonDetails);
-      } catch (error) {
-        console.error('Erro at Pokemon Details', error);
-      } finally {
-        setIsFetching(false);
-      }
-    };
-
-    !isFetching && fetchData();
-  }, []);
+  // Call the useDetails custom hook to fetch the details of the pokemon using the provided URL
+  const { pokemonDetails, isFavorite, handleSaveFavoriteAction, handleRemoveFavoriteAction } =
+    useDetails(url, name);
 
   return (
     <DetailsWrapper className="container-fluid d-flex justify-content-center align-content-start align-items-center flex-wrap">
@@ -142,13 +71,34 @@ export const Details = () => {
                 ))}
         </ul>
         <TextWrapper>
-          {/* Render the weight of the Pokemon */}
+          {/* Weight */}
           <span className="fs-6">Weight: {pokemonDetails?.weight}</span>
         </TextWrapper>
         <TextWrapper>
-          {/* Render the height of the Pokemon */}
+          {/* Height */}
           <span className="fs-6">Height: {pokemonDetails?.height}</span>
         </TextWrapper>
+
+        {/* Buttons to add/remove a favorited pokémon */}
+        <div className="d-grid gap-2 mt-5">
+          {!isFavorite ? (
+            <Button
+              onClick={() => (pokemonDetails ? handleSaveFavoriteAction(pokemonDetails) : null)}
+              className="w-100 fs-5 fw-bold"
+              variant="success"
+            >
+              Add to favorites
+            </Button>
+          ) : (
+            <Button
+              onClick={() => (pokemonDetails ? handleRemoveFavoriteAction(pokemonDetails) : null)}
+              className="w-100 fs-5 fw-bold"
+              variant="danger"
+            >
+              Remove from favorites
+            </Button>
+          )}
+        </div>
       </InfoWrapper>
     </DetailsWrapper>
   );
