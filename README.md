@@ -23,7 +23,7 @@ npm i
 ```
 - Start the application using 
 ```bash
-npm start
+npm run dev
 ```
 - Follow the url displayed in your console.
 
